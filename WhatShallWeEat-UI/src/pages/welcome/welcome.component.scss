@@ -1,0 +1,24 @@
+.welcome-wrapper {
+    height: 100%;
+    width: 100%;
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, #020024 0%, #3c3cbe 11%, #00d4ff 100%);
+}
+
+mat-card {
+    height: 476px;
+    width: 476px;
+}
+
+button {
+    color: #3c3cbe;
+}
+
+h1 {
+    color: #3c3cbe;
+}
+
+.text {
+    padding-left: 15px;
+    padding-right: 15px;
+}
