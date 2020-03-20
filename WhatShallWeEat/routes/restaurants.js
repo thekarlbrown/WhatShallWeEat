@@ -19,7 +19,7 @@ router.post('/', function(req, res, next) {
   MongoClient.connect('mongodb://localhost:27017/animals', function (err, db) {
   if (err) throw err
 
-  db.collection('restaurants').insert(req.body).toArray(function (err, result) {
+  db.collection('restaurants').insertOne(req.body, function(err, result) {
     if (err) throw err
     
     })
@@ -36,7 +36,7 @@ router.delete('/', function(req, res, next) {
   MongoClient.connect('mongodb://localhost:27017/animals', function (err, db) {
   if (err) throw err
 
-  db.collection('restaurants').remove({'uuid': req.body.uuid, 'name': req.body.name}).toArray(function (err, result) {
+  db.collection('restaurants').deleteOne({'uuid': req.body.uuid, 'name': req.body.name}, function (err, result) {
     if (err) throw err
     
     })
