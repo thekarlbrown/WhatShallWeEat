@@ -3,7 +3,8 @@ var router = express.Router();
 var MongoClient = require('mongodb').MongoClient
 
 router.get('/:uuid', function(req, res, next) {
-  MongoClient.connect('mongodb://localhost:27017/animals', function (err, db) {
+  MongoClient.connect('mongodb://localhost:27017/', function (err, client) {
+  var db = client.db('whatshallweeat');  
   if (err) throw err
 
   db.collection('restaurants').find({'uuid': req.params.uuid}).toArray(function (err, result) {
@@ -16,7 +17,8 @@ router.get('/:uuid', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-  MongoClient.connect('mongodb://localhost:27017/animals', function (err, db) {
+  MongoClient.connect('mongodb://localhost:27017/', function (err, client) {
+  var db = client.db('whatshallweeat');
   if (err) throw err
 
   db.collection('restaurants').insertOne(req.body, function(err, result) {
@@ -28,12 +30,14 @@ router.post('/', function(req, res, next) {
     if (err) throw err
 
     res.send(result);
+    client.close();
     })
   })
 });
 
 router.delete('/', function(req, res, next) {
-  MongoClient.connect('mongodb://localhost:27017/animals', function (err, db) {
+  MongoClient.connect('mongodb://localhost:27017/', function (err, client) {
+  var db = client.db('whatshallweeat');
   if (err) throw err
 
   db.collection('restaurants').deleteOne({'uuid': req.body.uuid, 'name': req.body.name}, function (err, result) {
@@ -45,6 +49,7 @@ router.delete('/', function(req, res, next) {
     if (err) throw err
 
     res.send(result);
+    client.close();
     })
   })
 });
