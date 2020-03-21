@@ -1,12 +1,10 @@
-<div fxLayoutAlign="center center" class="welcome-wrapper">
-    <mat-card fxLayoutAlign="start center" fxLayoutGap="30px" fxLayout="column">
-        <h1>
-            What shall we eat?
-        </h1>
-        <img src="../../assets/images/pizza.png" alt="Yummy Pizza">
-        <div class="text">
-            This webapp helps you decide where to go when you just can't pick a restaurant, and offers suggestions based on your location.
-        </div>
-        <button mat-stroked-button>Start your list!</button>
-    </mat-card>
-</div>
+<mat-card fxLayoutAlign="start center" fxLayoutGap="30px" fxLayout="column">
+    <h1>
+        What Shall We Eat?
+    </h1>
+    <img src="../../assets/images/pizza.png" alt="Yummy Pizza">
+    <div class="text">
+        This app helps you decide where to go out to eat when you can't pick a restaurant, and offers suggestions based on your location.
+    </div>
+    <button mat-stroked-button (click)="createNewList()">Start your list</button>
+</mat-card>
