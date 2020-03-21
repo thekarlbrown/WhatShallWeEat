@@ -31,4 +31,18 @@ app.get('*', function(req, res) {
   res.sendFile(path.join(__dirname + '/dist/index.html'));
 });
 
+var fs = require('fs');
+var http = require('http');
+var https = require('https');
+var privateKey  = fs.readFileSync('server.key', 'utf8');
+var certificate = fs.readFileSync('server.crt', 'utf8');
+
+var credentials = {key: privateKey, cert: certificate};
+
+var httpServer = http.createServer(app);
+var httpsServer = https.createServer(credentials, app);
+
+httpServer.listen(80);
+httpsServer.listen(443);
+
 module.exports = app;
