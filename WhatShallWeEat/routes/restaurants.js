@@ -18,7 +18,7 @@ router.get('/:uuid', function(req, res, next) {
 });
 
 router.get('/list/:location', function(req, res, next) {
-  request(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${req.params.location}&sensor=true&rankby=distance&key=AIzaSyBsXJ1ERBCVGD8w06pqaj_cp9y-IafpsLY&keyword=food`, function (error, response, body) {
+  request(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?${req.params.location}&sensor=true&rankby=distance&key=AIzaSyBsXJ1ERBCVGD8w06pqaj_cp9y-IafpsLY&keyword=food`, function (error, response, body) {
     res.send(body)
   });
 });
