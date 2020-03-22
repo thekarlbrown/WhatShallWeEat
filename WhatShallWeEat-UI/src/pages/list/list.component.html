@@ -1,6 +1,8 @@
 <mat-card fxLayoutAlign="start center" fxLayoutGap="10px" fxLayout="column">
-    <div>Create a list from nearby restaurants then get suggested where to go. <a (click)="linkToYourList()">Link to your List</a></div>
-    <mat-divider></mat-divider>
+    <div>Create a list from nearby restaurants then get suggested where to go | <a (click)="linkToYourList()">Copy List Link to Clipboard</a></div>
+    <mat-list>
+        <mat-divider></mat-divider>
+    </mat-list>
     <div fxLayout.gt-xs="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="start start">
         <mat-list>
             <mat-list-item><strong>Suggested Items</strong></mat-list-item>
@@ -12,7 +14,7 @@
                         <span class="material-icons" (click)="addToList(i)">add</span>
                         <span class="material-icons" (click)="removeFromSuggestions(i)">face</span>
                     </div>
-                </div></mat-list-item>
+                </mat-list-item>
             </span>
         </mat-list>
     </div>
