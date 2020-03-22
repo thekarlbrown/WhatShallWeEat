@@ -8,3 +8,26 @@ a {
     cursor: pointer;
     text-decoration: underline;
 }
+
+.green.material-icons {
+    color: green;
+    cursor: pointer; 
+}
+
+.red.material-icons {
+    color: red;
+    cursor: pointer; 
+}
+
+mat-list { 
+    overflow: auto;
+    max-height: 600px;
+ }
+
+.list-item {
+    padding: 5px;
+    border: 1px gray;
+    border-radius: 3px;
+    border-style: dashed;
+    width: 100%;
+}

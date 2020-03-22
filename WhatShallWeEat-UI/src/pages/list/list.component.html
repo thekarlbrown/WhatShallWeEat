@@ -1,19 +1,20 @@
-<mat-card fxLayoutAlign="start center" fxLayoutGap="10px" fxLayout="column">
+<mat-card fxLayoutAlign="start start" fxLayoutGap="10px" fxLayout="column">
     <div>Create a list from nearby restaurants then get suggested where to go | <a (click)="linkToYourList()">Copy List Link to Clipboard</a></div>
     <mat-list>
         <mat-divider></mat-divider>
     </mat-list>
     <div fxLayout.gt-xs="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="start start">
         <mat-list>
-            <mat-list-item><strong>Suggested Items</strong></mat-list-item>
+            <mat-list-item><strong>Suggested Restaurants</strong></mat-list-item>
             <span *ngFor="let item of suggestedRestaurants; let i = index">
-                <mat-divider></mat-divider>
-                <mat-list-item fxLayout="column" fxLayoutAlign="space-between center">
-                    <div>{{ item.name }} </div>
-                    <div fxLayoutGap="10px" fxLayout="column">
-                        <span class="material-icons" (click)="addToList(i)">add</span>
-                        <span class="material-icons" (click)="removeFromSuggestions(i)">face</span>
-                    </div>
+                <mat-list-item>
+                    <div class="list-item" fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="25px">
+                        <div>{{ item.name }} </div>
+                        <div fxLayoutGap="10px" fxLayout="row">
+                            <span class="material-icons red" (click)="removeFromSuggestions(i)">delete</span>
+                            <span class="material-icons green" (click)="addToList(i)">add</span>
+                        </div>
+                    </div> 
                 </mat-list-item>
             </span>
         </mat-list>
