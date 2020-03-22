@@ -29,10 +29,27 @@ mat-list {
     max-height: 460px;
  }
 
+mat-spinner {
+    padding-left: 15px;
+}
+
 .list-item {
     padding: 5px;
     border: 1px gray;
     border-radius: 3px;
     border-style: dashed;
     width: 100%;
+}
+
+.insure-list-width {
+    width: 100%;
+}
+
+.add-item {
+    width: 100%;
+    padding: 5px;
+}
+
+span.material-icons {
+    cursor: pointer;
 }

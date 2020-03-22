@@ -1,7 +1,11 @@
 import { HttpCallsService } from './../../httpcalls.service';
-import { logging } from 'protractor';
-import { Component, OnInit } from '@angular/core';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+
+export interface DialogData {
+  text: string;
+}
 
 @Component({
   selector: 'app-list',
@@ -13,9 +17,13 @@ export class ListComponent implements OnInit {
   latitude: number;
   longitude: number;
   suggestedRestaurants: [];
+  chosenRestaurants: [] = [];
+  @ViewChild('input') input: ElementRef;
+
 
   constructor(private route: ActivatedRoute,
-              private httpCalls: HttpCallsService) { }
+              private httpCalls: HttpCallsService,
+              private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.uuid = this.route.snapshot.params.uuid;
@@ -34,14 +42,56 @@ export class ListComponent implements OnInit {
   }
 
   linkToYourList() {
-    navigator.clipboard.writeText(`https://100.27.23.136:8443/${this.uuid}`);
+    navigator.clipboard.writeText(`https://whatshallweeat.dev/${this.uuid}`);
   }
 
   addToList(index: number) {
+    this.suggestedRestaurants.splice(index, 1);
+    // API call to add to list
+  }
 
+  addNewItemToList() {
+    // Clear textbox
+    // API call to add to list
+    console.log(this.input.nativeElement.value);
   }
 
   removeFromSuggestions(index: number) {
-
+    this.suggestedRestaurants.splice(index, 1);
   }
+
+  removeFromChosen(index: number) {
+
+    // API Call to delete from list
+  }
+
+  whatShallWeEat() {
+    if (!this.chosenRestaurants || this.chosenRestaurants.length === 0) {
+      const dialogRef = this.dialog.open(DialogWhatShallWeEat, {
+        width: '350px',
+        data: { text: 'You do not have any restaurants to choose from.' }
+      });
+    } else {
+      const dialogRef = this.dialog.open(DialogWhatShallWeEat, {
+        width: '350px',
+        data: { text: `You should go to ${this.chosenRestaurants[Math.floor(Math.random() * this.chosenRestaurants.length)]} tonight!` }
+      });
+    }
+  }
+}
+
+@Component({
+  selector: 'dialog-what-shall-we-eat',
+  templateUrl: 'dialog-what-shall-we-eat.html',
+})
+export class DialogWhatShallWeEat {
+
+  constructor(
+    public dialogRef: MatDialogRef<DialogWhatShallWeEat>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+  onOkClick(): void {
+    this.dialogRef.close();
+  }
+
 }
