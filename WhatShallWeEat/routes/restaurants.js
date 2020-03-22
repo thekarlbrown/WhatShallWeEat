@@ -18,9 +18,14 @@ router.get('/:uuid', function(req, res, next) {
 });
 
 router.get('/list/:location', function(req, res, next) {
-  request(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?${req.params.location}&sensor=true&rankby=distance&key=AIzaSyBsXJ1ERBCVGD8w06pqaj_cp9y-IafpsLY&keyword=food`, function (error, response, body) {
-    res.send(body)
-  });
+  var fs = require('fs'), filename = __dirname + '/googlekey';
+  fs.readFile(filename, 'utf8', function(err, data) {
+    if (err) throw err;
+    console.log(data);
+    request(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?${req.params.location}&sensor=true&rankby=distance&key=${data}&keyword=food`, function (error, response, body) {
+      res.send(body)
+    });
+  })
 });
 
 router.post('/', function(req, res, next) {

@@ -32,17 +32,17 @@ app.get('*', function(req, res) {
 });
 
 var fs = require('fs');
-// var http = require('http');
+var http = require('http');
 var https = require('https');
 var privateKey  = fs.readFileSync(__dirname + '/server.key', 'utf8');
 var certificate = fs.readFileSync(__dirname + '/server.cert', 'utf8');
 
 var credentials = {key: privateKey, cert: certificate};
 
-// var httpServer = http.createServer(app);
+var httpServer = http.createServer(app);
 var httpsServer = https.createServer(credentials, app);
 
-// httpServer.listen(8080);
-httpsServer.listen(8443);
+httpServer.listen(80);
+httpsServer.listen(443);
 
 module.exports = app;
