@@ -1,1 +1,19 @@
-{{uuid}}
+<mat-card fxLayoutAlign="start center" fxLayoutGap="10px" fxLayout="column">
+    <div>Create a list from nearby restaurants then get suggested where to go. <a (click)="linkToYourList()">Link to your List</a></div>
+    <mat-divider></mat-divider>
+    <div fxLayout.gt-xs="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="start start">
+        <mat-list>
+            <mat-list-item><strong>Suggested Items</strong></mat-list-item>
+            <span *ngFor="let item of suggestedRestaurants; let i = index">
+                <mat-divider></mat-divider>
+                <mat-list-item fxLayout="column" fxLayoutAlign="space-between center">
+                    <div>{{ item.name }} </div>
+                    <div fxLayoutGap="10px" fxLayout="column">
+                        <span class="material-icons" (click)="addToList(i)">add</span>
+                        <span class="material-icons" (click)="removeFromSuggestions(i)">face</span>
+                    </div>
+                </div></mat-list-item>
+            </span>
+        </mat-list>
+    </div>
+</mat-card>
