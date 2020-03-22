@@ -49,7 +49,7 @@ export class ListComponent implements OnInit {
 
   addToList(index: number) {
     this.httpCalls.addRestaurantToList({
-      name: (this.suggestedRestaurants.splice(index, 1) as any).name,
+      name: (this.suggestedRestaurants.splice(index, 1) as any)[0].name,
       uuid: this.uuid
     })
       .subscribe(result => this.chosenRestaurants = result as []);
@@ -72,7 +72,7 @@ export class ListComponent implements OnInit {
 
   removeFromChosen(index: number) {
     this.httpCalls.removeRestaurantFromList({
-      name: (this.chosenRestaurants.splice(index, 1) as any).name,
+      name: (this.chosenRestaurants.splice(index, 1) as any)[0].name,
       uuid: this.uuid
     })
       .subscribe(result => this.chosenRestaurants = result as []);
