@@ -39,6 +39,8 @@ export class ListComponent implements OnInit {
       this.longitude = -77.175630;
       this.httpCalls.getRestaurantsFromPlacesAPI(this.latitude, this.longitude).subscribe(result => this.suggestedRestaurants = result);
     }
+
+    this.httpCalls.getRestaurantListByUUID(this.uuid).subscribe(result => this.chosenRestaurants = result as []);
   }
 
   linkToYourList() {
@@ -46,14 +48,22 @@ export class ListComponent implements OnInit {
   }
 
   addToList(index: number) {
-    this.suggestedRestaurants.splice(index, 1);
-    // API call to add to list
+    this.httpCalls.addRestaurantToList({
+      name: (this.suggestedRestaurants.splice(index, 1) as any).name,
+      uuid: this.uuid
+    })
+      .subscribe(result => this.chosenRestaurants = result as []);
   }
 
   addNewItemToList() {
-    // Clear textbox
-    // API call to add to list
-    console.log(this.input.nativeElement.value);
+    this.httpCalls.addRestaurantToList({
+      name: this.input.nativeElement.value,
+      uuid: this.uuid
+    })
+      .subscribe(result => {
+        this.chosenRestaurants = result as [];
+        this.input.nativeElement.value = '';
+      });
   }
 
   removeFromSuggestions(index: number) {
@@ -61,8 +71,11 @@ export class ListComponent implements OnInit {
   }
 
   removeFromChosen(index: number) {
-
-    // API Call to delete from list
+    this.httpCalls.removeRestaurantFromList({
+      name: (this.chosenRestaurants.splice(index, 1) as any).name,
+      uuid: this.uuid
+    })
+      .subscribe(result => this.chosenRestaurants = result as []);
   }
 
   whatShallWeEat() {

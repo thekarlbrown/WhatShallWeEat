@@ -970,4 +970,16 @@ export class HttpCallsService {
     map((result: any) => result.results),
   );*/
   }
+
+  getRestaurantListByUUID(uuid: string) {
+    return this.http.get(`https://whatshallweeat.dev/api/restaurants/uuid=${uuid}`);
+  }
+
+  addRestaurantToList(restaurant: {}) {
+    return this.http.post(`https://whatshallweeat.dev/api/restaurants/`, restaurant);
+  }
+
+  removeRestaurantFromList(restaurant: {}) {
+    return this.http.delete(`https://whatshallweeat.dev/api/restaurants/`, restaurant);
+  }
 }
