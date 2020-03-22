@@ -1,3 +1,8 @@
+mat-card {
+    overflow: auto;
+    max-height: 640px;
+}
+
 mat-list-item {
     padding-left: 10px;
     padding-right: 10px;
@@ -21,7 +26,7 @@ a {
 
 mat-list { 
     overflow: auto;
-    max-height: 600px;
+    max-height: 540px;
  }
 
 .list-item {

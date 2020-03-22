@@ -1,6 +1,8 @@
 .background {
     height: 100%;
     width: 100%;
+    overflow-x: hidden;
+    position: relative;
     background: rgb(2,0,36);
     background: linear-gradient(90deg, #020024 0%, #3c3cbe 11%, #00d4ff 100%);
 }
