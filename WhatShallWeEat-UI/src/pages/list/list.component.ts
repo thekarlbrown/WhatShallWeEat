@@ -23,7 +23,7 @@ export class ListComponent implements OnInit {
       navigator.geolocation.getCurrentPosition(position => {
           this.latitude = position.coords.latitude;
           this.longitude = position.coords.longitude;
-          this.httpCalls.getRestaurantsFromPlacesAPI(this.latitude, this.longitude).subscribe(console.log);
+          this.httpCalls.getRestaurantsFromPlacesAPI(this.latitude, this.longitude).subscribe(result => console.log(result));
         });
     } else {
       this.latitude = 38.957599;
