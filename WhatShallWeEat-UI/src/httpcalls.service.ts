@@ -10,7 +10,7 @@ export class HttpCallsService {
   constructor(private http: HttpClient) { }
 
   getRestaurantsFromPlacesAPI(lat: number, lng: number) {
-    return this.http.get(`http://127.0.0.1:3000/api/restaurants/list/lat=${lat}&lng=${lng}`)
+    return this.http.get(`https://100.27.23.136:8443/api/restaurants/list/lat=${lat}&lng=${lng}`)
       .pipe(
         map((result: any) => result.results),
         map(results => results.name)
