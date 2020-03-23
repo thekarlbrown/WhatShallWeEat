@@ -79,6 +79,7 @@ export class ListComponent implements OnInit {
   }
 
   whatShallWeEat() {
+    console.log(this.chosenRestaurants[Math.floor(Math.random() * this.chosenRestaurants.length)]);
     if (!this.chosenRestaurants || this.chosenRestaurants.length === 0) {
       const dialogRef = this.dialog.open(DialogWhatShallWeEat, {
         width: '350px',

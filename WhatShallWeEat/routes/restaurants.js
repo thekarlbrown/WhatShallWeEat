@@ -21,7 +21,7 @@ router.get('/list/:location', function(req, res, next) {
   var fs = require('fs'), filename = __dirname + '/googlekey';
   fs.readFile(filename, 'utf8', function(err, data) {
     if (err) throw err;
-    console.log(data);
+
     request(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?${req.params.location}&sensor=true&rankby=distance&key=${data}&keyword=food`, function (error, response, body) {
       res.send(body)
     });
@@ -48,7 +48,7 @@ router.post('/', function(req, res, next) {
 });
 
 router.delete('/', function(req, res, next) {
-	console.log(req.body);  
+ 
 MongoClient.connect('mongodb://localhost:27017/', function (err, client) {
   var db = client.db('whatshallweeat');
   if (err) throw err

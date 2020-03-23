@@ -980,9 +980,10 @@ export class HttpCallsService {
   }
 
   removeRestaurantFromList(restaurant: {}) {
-	const httpOptions = {
-    		headers: new HttpHeaders({ 'Content-Type': 'application/json' }), body: restaurant
-	};
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }), body: restaurant
+    };
+
     return this.http.delete(`https://whatshallweeat.dev/api/restaurants/`, httpOptions);
   }
 }
