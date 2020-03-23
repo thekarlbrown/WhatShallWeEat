@@ -36,13 +36,12 @@ router.post('/', function(req, res, next) {
   db.collection('restaurants').insertOne(req.body, function(err, result) {
     if (err) throw err
     
-    })
+    db.collection('restaurants').find({'uuid': req.body.uuid}).toArray(function (err, result) {
+      if (err) throw err
   
-  db.collection('restaurants').find({'uuid': req.body.uuid}).toArray(function (err, result) {
-    if (err) throw err
-
-    res.send(result);
-    client.close();
+      res.send(result);
+      client.close();
+      })
     })
   })
 });
@@ -55,14 +54,13 @@ MongoClient.connect('mongodb://localhost:27017/', function (err, client) {
 
   db.collection('restaurants').deleteOne({'uuid': req.body.uuid, 'name': req.body.name}, function (err, result) {
     if (err) throw err
-    
-    })
   
-  db.collection('restaurants').find({'uuid': req.body.uuid}).toArray(function (err, result) {
-    if (err) throw err
+    db.collection('restaurants').find({'uuid': req.body.uuid}).toArray(function (err, result) {
+      if (err) throw err
 
-    res.send(result);
-    client.close();
+      res.send(result);
+      client.close();
+      })
     })
   })
 });
