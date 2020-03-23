@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { of } from 'rxjs';
 
@@ -972,7 +972,7 @@ export class HttpCallsService {
   }
 
   getRestaurantListByUUID(uuid: string) {
-    return this.http.get(`https://whatshallweeat.dev/api/restaurants/uuid=${uuid}`);
+    return this.http.get(`https://whatshallweeat.dev/api/restaurants/${uuid}`);
   }
 
   addRestaurantToList(restaurant: {}) {
@@ -980,6 +980,9 @@ export class HttpCallsService {
   }
 
   removeRestaurantFromList(restaurant: {}) {
-    return this.http.delete(`https://whatshallweeat.dev/api/restaurants/`, restaurant);
+	const httpOptions = {
+    		headers: new HttpHeaders({ 'Content-Type': 'application/json' }), body: restaurant
+	};
+    return this.http.delete(`https://whatshallweeat.dev/api/restaurants/`, httpOptions);
   }
 }

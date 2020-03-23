@@ -48,7 +48,8 @@ router.post('/', function(req, res, next) {
 });
 
 router.delete('/', function(req, res, next) {
-  MongoClient.connect('mongodb://localhost:27017/', function (err, client) {
+	console.log(req.body);  
+MongoClient.connect('mongodb://localhost:27017/', function (err, client) {
   var db = client.db('whatshallweeat');
   if (err) throw err
 
