@@ -64,15 +64,17 @@ export class ListComponent implements OnInit {
 
   addNewItemToList() {
     const restaurantName = this.input.nativeElement.value;
-    this.httpCalls.addRestaurantToList({
+    if (restaurantName && restaurantName.length > 0) {
+      this.httpCalls.addRestaurantToList({
       name: restaurantName,
       uuid: this.uuid
-    })
+      })
       .subscribe(result => {
         this.chosenRestaurants = result as [];
         this.snackBar.open(`Added ${restaurantName}`, 'Dismiss', { duration: 2500 });
         this.input.nativeElement.value = '';
       });
+    }
   }
 
   removeFromSuggestions(index: number) {
