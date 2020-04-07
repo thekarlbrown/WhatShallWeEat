@@ -5,7 +5,7 @@
     </mat-list>
     <div fxLayout.gt-xs="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutAlign="start start">
         <mat-list>
-            <mat-list-item><strong>Suggested Restaurants  </strong><mat-spinner [diameter]="30" *ngIf="suggestedRestaurants === undefined"></mat-spinner></mat-list-item>
+            <mat-list-item><strong>Suggested Restaurants  </strong><div *ngIf="suggestedRestaurants === undefined"><mat-spinner [diameter]="30"></mat-spinner> <div class="loading-location-data">&nbsp;&nbsp;&nbsp;Loading Location</div></div></mat-list-item>
             <span *ngFor="let item of suggestedRestaurants; let i = index">
                 <mat-list-item>
                     <div class="list-item" fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="25px">
@@ -18,7 +18,7 @@
                 </mat-list-item>
             </span>
         </mat-list>
-        <mat-list [ngClass.xs]="'insure-list-width'">
+        <mat-list class="chosen-restaurants-list" [ngClass.xs]="'insure-list-width'">
             <mat-list-item><div fxLayout="row" fxLayoutGap="50px" fxLayoutAlign="start center"><strong>Your Choices</strong><button mat-stroked-button (click)="whatShallWeEat()">What Shall We Eat?</button></div></mat-list-item>
             <mat-list-item>
                 <div class="add-item" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="25px">
