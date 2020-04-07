@@ -46,6 +46,7 @@ export class ListComponent implements OnInit {
   }
 
   linkToYourList() {
+    this.snackBar.open(`Copied Link to Clipboard`, 'Dismiss', { duration: 2500 });
     navigator.clipboard.writeText(`https://whatshallweeat.dev/${this.uuid}`);
   }
 
@@ -57,7 +58,7 @@ export class ListComponent implements OnInit {
     })
       .subscribe(result => {
         this.chosenRestaurants = result as [];
-        this.snackBar.open(`Added ${restaurantName}`, 'Dismiss');
+        this.snackBar.open(`Added ${restaurantName}`, 'Dismiss', { duration: 2500 });
       });
   }
 
@@ -69,13 +70,13 @@ export class ListComponent implements OnInit {
     })
       .subscribe(result => {
         this.chosenRestaurants = result as [];
-        this.snackBar.open(`Added ${restaurantName}`, 'Dismiss');
+        this.snackBar.open(`Added ${restaurantName}`, 'Dismiss', { duration: 2500 });
         this.input.nativeElement.value = '';
       });
   }
 
   removeFromSuggestions(index: number) {
-    this.snackBar.open(`Deleted ${(this.suggestedRestaurants[index] as any).name}`, 'Dismiss');
+    this.snackBar.open(`Deleted ${(this.suggestedRestaurants[index] as any).name}`, 'Dismiss', { duration: 2500 });
     this.suggestedRestaurants.splice(index, 1);
   }
 
@@ -87,7 +88,7 @@ export class ListComponent implements OnInit {
     })
       .subscribe(result => {
         this.chosenRestaurants = result as [];
-        this.snackBar.open(`Deleted ${restaurantName}`, 'Dismiss');
+        this.snackBar.open(`Deleted ${restaurantName}`, 'Dismiss', { duration: 2500 });
       });
   }
 
@@ -100,7 +101,7 @@ export class ListComponent implements OnInit {
     } else {
       const dialogRef = this.dialog.open(DialogWhatShallWeEat, {
         width: '350px',
-        data: { text: `You should go to ${this.chosenRestaurants[Math.floor(Math.random() * this.chosenRestaurants.length)]} tonight!` }
+        data: { text: `You should go to ${(this.chosenRestaurants[Math.floor(Math.random() * this.chosenRestaurants.length)] as any).name} tonight!` }
       });
     }
   }
