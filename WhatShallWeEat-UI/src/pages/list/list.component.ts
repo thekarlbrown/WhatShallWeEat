@@ -2,6 +2,7 @@ import { HttpCallsService } from './../../httpcalls.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 export interface DialogData {
   text: string;
@@ -23,7 +24,8 @@ export class ListComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private httpCalls: HttpCallsService,
-              private dialog: MatDialog) { }
+              private dialog: MatDialog,
+              private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.uuid = this.route.snapshot.params.uuid;
@@ -48,38 +50,48 @@ export class ListComponent implements OnInit {
   }
 
   addToList(index: number) {
+    const restaurantName = (this.suggestedRestaurants.splice(index, 1) as any)[0].name;
     this.httpCalls.addRestaurantToList({
-      name: (this.suggestedRestaurants.splice(index, 1) as any)[0].name,
-      uuid: this.uuid
-    })
-      .subscribe(result => this.chosenRestaurants = result as []);
-  }
-
-  addNewItemToList() {
-    this.httpCalls.addRestaurantToList({
-      name: this.input.nativeElement.value,
+      name: restaurantName,
       uuid: this.uuid
     })
       .subscribe(result => {
         this.chosenRestaurants = result as [];
+        this.snackBar.open(`Added ${restaurantName}`, 'Dismiss');
+      });
+  }
+
+  addNewItemToList() {
+    const restaurantName = this.input.nativeElement.value;
+    this.httpCalls.addRestaurantToList({
+      name: restaurantName,
+      uuid: this.uuid
+    })
+      .subscribe(result => {
+        this.chosenRestaurants = result as [];
+        this.snackBar.open(`Added ${restaurantName}`, 'Dismiss');
         this.input.nativeElement.value = '';
       });
   }
 
   removeFromSuggestions(index: number) {
+    this.snackBar.open(`Deleted ${(this.suggestedRestaurants[index] as any).name}`, 'Dismiss');
     this.suggestedRestaurants.splice(index, 1);
   }
 
   removeFromChosen(index: number) {
+    const restaurantName = (this.chosenRestaurants.splice(index, 1) as any)[0].name;
     this.httpCalls.removeRestaurantFromList({
-      name: (this.chosenRestaurants.splice(index, 1) as any)[0].name,
+      name: restaurantName,
       uuid: this.uuid
     })
-      .subscribe(result => this.chosenRestaurants = result as []);
+      .subscribe(result => {
+        this.chosenRestaurants = result as [];
+        this.snackBar.open(`Deleted ${restaurantName}`, 'Dismiss');
+      });
   }
 
   whatShallWeEat() {
-    console.log(this.chosenRestaurants[Math.floor(Math.random() * this.chosenRestaurants.length)]);
     if (!this.chosenRestaurants || this.chosenRestaurants.length === 0) {
       const dialogRef = this.dialog.open(DialogWhatShallWeEat, {
         width: '350px',
