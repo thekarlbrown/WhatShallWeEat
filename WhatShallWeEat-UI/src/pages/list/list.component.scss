@@ -36,9 +36,8 @@ mat-spinner {
 
 .list-item {
     padding: 5px;
-    border: 1px gray;
-    border-radius: 3px;
-    border-style: dashed;
+    background-color: #f5f6f7;
+    border-radius: 10px;
     width: 100%;
 }
 
@@ -48,7 +47,7 @@ mat-spinner {
 
 .add-item {
     width: 100%;
-    padding: 5px;
+    border-radius: 10px;
 }
 
 span.material-icons {

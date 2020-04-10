@@ -2,3 +2,13 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.material-icons {
+    border-radius: 50%;
+    background-color: #C7C8C8;
+    height: 28px;
+    width: 28px;
+    padding-left: 2px;
+    padding-top: 2px;
+}
+.material-icons:hover { background-color:#999999; }
+.material-icons:focus { background-color:#999999; }
